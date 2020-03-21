@@ -19,6 +19,13 @@
     </b-card-body>
     <template v-slot:footer>
         <a href="https://vmsdurano.com/" target="_blank">Vincent Maverick Durano</a> © 2020
+        <p>
+          If you find this project useful — or just feeling generous, consider buying me a beer or a coffee.
+        </p>
+        <p>
+          <a href="https://www.paypal.me/vmsdurano"><img src="https://proudmonkeystorage.blob.core.windows.net/cdn/common/donate_paypal.svg" height="37"></a>
+            |  <a href="https://www.buymeacoffee.com/ImP9gONBW"><img src="https://proudmonkeystorage.blob.core.windows.net/cdn/common/donate_coffee.png"></a>
+        </p>
     </template>
   </b-card>
 </div>

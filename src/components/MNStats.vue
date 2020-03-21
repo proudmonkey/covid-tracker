@@ -12,7 +12,7 @@
                          <template>
                             <div>
                                 <b-iconstack font-scale="5">
-                                    <b-icon stacked icon="shield-lock-fill" scale="0.5" shift-v="-0.25"></b-icon>
+                                    <b-icon stacked icon="question" scale="0.5" shift-v="-0.25"></b-icon>
                                     <b-icon stacked icon="circle"></b-icon>
                                 </b-iconstack>
                             </div>
@@ -41,7 +41,7 @@
                     <b-card-body>
                         <div>
                             <b-iconstack font-scale="5">
-                                <b-icon stacked icon="heart" scale="0.5" shift-v="-0.25"></b-icon>
+                                <b-icon stacked icon="shield-lock" scale="0.5" shift-v="-0.25"></b-icon>
                                 <b-icon stacked icon="circle"></b-icon>
                             </b-iconstack>
                         </div>
@@ -55,7 +55,7 @@
                     <b-card-body>
                         <div>
                             <b-iconstack font-scale="5">
-                                <b-icon stacked icon="x-circle-fill" scale="0.5" shift-v="-0.25" animation="spin"></b-icon>
+                                <b-icon stacked icon="x-circle" scale="0.5" shift-v="-0.25" animation="spin"></b-icon>
                                 <b-icon stacked icon="circle"></b-icon>
                             </b-iconstack>
                         </div>

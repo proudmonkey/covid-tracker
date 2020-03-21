@@ -3,13 +3,13 @@
         <h1>US COVID-19 Status</h1>
         <b-table striped hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :no-sort-reset="true" >
             <template v-slot:head(total)>
-                 Tested <span class="text-info">({{totalTestsCount | numeral('0,0')}})</span>
+                 Tested (<span class="text-info">{{totalTestsCount | numeral('0,0')}}</span>)
             </template>
             <template v-slot:head(positive)>
-                Positive <span class="text-warning">({{totalPositiveCount | numeral('0,0')}})</span>
+                Positive (<span class="text-warning">({{totalPositiveCount | numeral('0,0')}}</span>)
             </template>
             <template v-slot:head(death)>
-                Deaths <span class="text-danger">({{ totalDeathCount | numeral('0,0')}})</span>
+                Deaths (<span class="text-danger">{{ totalDeathCount | numeral('0,0')}}</span>)
             </template>
             <template v-slot:cell(state)="data">
                <b>{{data.item.state}}</b>
