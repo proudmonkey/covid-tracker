@@ -33,3 +33,10 @@ steps:
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'CovidStatsAppSVC'
+    appName: 'CovidStats'
+    package: '$(System.DefaultWorkingDirectory)'
+    customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
