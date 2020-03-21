@@ -37,6 +37,6 @@ steps:
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'CovidStatsAppSVC'
-    appName: 'CovidStats'
+    appName: 'covid-stats'
     package: '$(System.DefaultWorkingDirectory)'
     customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
