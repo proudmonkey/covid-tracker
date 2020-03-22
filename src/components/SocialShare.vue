@@ -1,10 +1,10 @@
 <template>
   <div class="social">
-    <facebook :url="url" scale="2"></facebook>
-    <twitter :url="url" title="Check me on Github" scale="2"></twitter>
-    <linkedin :url="url" scale="2"></linkedin>
-    <google :url="url" scale="2"></google>
-    <email :url="url" subject="COVID-19 Status Update" scale="2"></email>
+    <facebook :url="url" title="Check the latest status update on COVID-19 here:" scale="2"></facebook>
+    <twitter :url="url" title="Check the latest status update on COVID-19 here:" scale="2"></twitter>
+    <linkedin :url="url" title="Check the latest status update on COVID-19 here:" scale="2"></linkedin>
+    <google :url="url" title="Check the latest status update on COVID-19 here:" scale="2"></google>
+    <email :url="url" subject="Check the latest status update on COVID-19 here:" scale="2"></email>
   </div>
 </template>
 

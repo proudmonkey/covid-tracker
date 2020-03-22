@@ -24,10 +24,10 @@
         <p>
           If you find this project useful — or just feeling generous, consider buying me a beer or a coffee.
         </p>
-        <p>
+        <div class="donate">
           <a href="https://www.paypal.me/vmsdurano"><img src="https://proudmonkeystorage.blob.core.windows.net/cdn/common/donate_paypal.svg" height="37"></a>
-            |  <a href="https://www.buymeacoffee.com/ImP9gONBW"><img src="https://proudmonkeystorage.blob.core.windows.net/cdn/common/donate_coffee.png"></a>
-        </p>
+              <a href="https://www.buymeacoffee.com/ImP9gONBW"><img src="https://proudmonkeystorage.blob.core.windows.net/cdn/common/donate_coffee.png"></a>
+        </div>
     </template>
   </b-card>
 </div>
@@ -48,5 +48,9 @@ export default {
 #app {
   text-align: center;
   margin-top: 10px;
+}
+
+.donate > a {
+  padding: .5em;
 }
 </style>
