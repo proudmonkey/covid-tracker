@@ -18,6 +18,8 @@
       -->
     </b-card-body>
     <template v-slot:footer>
+        <SocialShare />
+        <br/>
         <a href="https://vmsdurano.com/" target="_blank">Vincent Maverick Durano</a> © 2020
         <p>
           If you find this project useful — or just feeling generous, consider buying me a beer or a coffee.
@@ -30,6 +32,17 @@
   </b-card>
 </div>
 </template>
+
+<script>
+import SocialShare from "./components/SocialShare";
+
+export default {
+  name: "App",
+  components: {
+    SocialShare
+  }
+};
+</script>
 
 <style>
 #app {
