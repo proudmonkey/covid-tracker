@@ -18,9 +18,15 @@
       -->
     </b-card-body>
     <template v-slot:footer>
+        <div class="mt-2 mb-2">
+          Sources: <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html" target="_blank" class="card-link">MN Department of Health</a> 
+          | <a href="https://covidtracking.com/" target="_blank">US COVID Tracking</a>
+          | <a href="https://services.arcgis.com/pEosvuftL1Kgj1UF/ArcGIS/rest/services" target="_blank">ArcGIS</a>
+          | <a href="https://bao.arcgis.com/InfographicsPlayer/ArcGISPro/BA_Covid19Files/minnesota.html" target="_blank">ESRI Cases and Planning Report</a>
+        </div>
         <SocialShare />
         <br/>
-        <a href="https://vmsdurano.com/" target="_blank">Vincent Maverick Durano</a> © 2020
+        <a href="https://vmsdurano.com/" target="_blank">Vincent Maverick Durano</a> 2020
         <p>
           If you find this project useful — or just feeling generous, consider buying me a beer or a coffee.
         </p>

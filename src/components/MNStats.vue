@@ -81,46 +81,55 @@
         </b-row>
     </b-container>
 
-    <div class="mt-3">
-        <b-table head-variant="dark" hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :no-sort-reset="true" >
-            <template v-slot:cell(name)="data">
-               <b>{{data.item.attributes.name}}</b>
-            </template>
-            <template v-slot:cell(attributes.confirmed)="data">
-                <b-badge variant="dark">{{data.item.attributes.confirmed | numeral('0,0')}}</b-badge>
-            </template>
-            <template v-slot:cell(recovered)="data">
-               <b-badge variant="dark">{{data.item.attributes.recovered | numeral('0,0')}}</b-badge>
-            </template>
-            <template v-slot:cell(deaths)="data">
-               <b-badge variant="danger">{{data.item.attributes.deaths | numeral('0,0')}}</b-badge>
-            </template>
-        </b-table>
-    </div>
-
-    <div class="mt-5">
-       Sources: <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html" target="_blank" class="card-link">MN Department of Health</a> 
-       | <a href="https://covidtracking.com/" target="_blank">US COVID Tracking</a>
-       | <a href="https://services.arcgis.com/pEosvuftL1Kgj1UF/ArcGIS/rest/services" target="_blank">ArcGIS</a>
-       | <a href="https://bao.arcgis.com/InfographicsPlayer/ArcGISPro/BA_Covid19Files/minnesota.html" target="_blank">ESRI Cases and Planning Report</a>
-    </div>
+    <b-container class="mt-5">
+        <b-row>
+            <b-col>
+                <b-card bg-variant="dark" text-variant="white" title="Details">
+                    <b-table head-variant="dark" small responsive :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :no-sort-reset="true" >
+                        <template v-slot:cell(name)="data">
+                        <b>{{data.item.attributes.name}}</b>
+                        </template>
+                        <template v-slot:cell(attributes.confirmed)="data">
+                            <b-badge variant="warning">{{data.item.attributes.confirmed | numeral('0,0')}}</b-badge>
+                        </template>
+                        <template v-slot:cell(recovered)="data">
+                        <b-badge variant="success">{{data.item.attributes.recovered | numeral('0,0')}}</b-badge>
+                        </template>
+                        <template v-slot:cell(deaths)="data">
+                        <b-badge variant="danger">{{data.item.attributes.deaths | numeral('0,0')}}</b-badge>
+                        </template>
+                    </b-table>
+                 </b-card>
+            </b-col>
+            <b-col>
+                <b-card bg-variant="dark" text-variant="white" title="Trends">
+                    <CaseTrendChart />
+                </b-card>
+                 
+            </b-col>
+        </b-row>
+    </b-container>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CaseTrendChart from "./graph/MNCaseTrend.vue";
 
 export default {
+  components: {
+    CaseTrendChart
+  },
   data () {
     return {
       recent: [],
       sortBy: 'attributes.confirmed',
       sortDesc: true,
       fields:[
-          { key: 'name', label:'County'},
-          { key: 'attributes.confirmed', label:'Positive', sortable: true},
-          'recovered',
-          'deaths'
+          { key: 'name', label:'County', variant: 'light'},
+          { key: 'attributes.confirmed', label:'Positive', sortable: true, variant: 'light'},
+          { key: 'recovered', label:'Recovered', variant: 'light'},
+          { key: 'deaths', label:'Deaths', variant: 'light'}
         ],
       items: []
     }

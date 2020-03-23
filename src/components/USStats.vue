@@ -65,7 +65,7 @@
         </b-container>
 
         <div class="mt-3">
-            <b-table head-variant="dark" hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :no-sort-reset="true" >
+            <b-table head-variant="dark" small hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :no-sort-reset="true" >
                 <template v-slot:cell(state)="data">
                 <b>{{data.item.state}}</b>
                 </template>
@@ -79,11 +79,6 @@
                 <b class="text-danger">{{data.item.death | numeral('0,0')}}</b>
                 </template>
             </b-table>
-        </div>
-        <div class="mt-5">
-            Source: <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html" target="_blank" class="card-link">MN Department of Health</a> 
-            | Data: <a href="https://covidtracking.com/" target="_blank">US COVID Tracking</a>
-            | CDC: <a href="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/cases-in-us.html" target="_blank">US Cases Report</a>
         </div>
     </div>
 </template>
