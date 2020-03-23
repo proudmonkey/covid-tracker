@@ -13,7 +13,7 @@
 import LineChart from './LineChart.vue'
 import axios from 'axios'
 import * as moment from "moment/moment";
- import _ from 'lodash'
+import _ from 'lodash'
 
 export default {
   name: 'LineChartContainer',
@@ -21,17 +21,11 @@ export default {
   data() {
       return {
         loaded: false,
-        chartData: [],
-        chartLabels: [],
         agg:[]
       }
   },
   computed: {
         totalCases(){
-            // let cases = this.chartData.map((attr) => {
-            //     return attr.attributes;
-            // }).map(p => p.confirmed);
-            console.log(this.agg.map(p => p.cases))
             return this.agg.map(p => p.cases);
         },
         totalRecovery(){
@@ -53,15 +47,22 @@ export default {
                 return attr.attributes;
          });
 
-        this.agg = _.map(_.groupBy(aggregateData,'reportdt'), (o,i) =>{
-                return { 
-                    dates: new moment(new Date(parseInt(i))).format('MM/DD'),
+        let groupByDay = _.groupBy(aggregateData,  (attr) => {
+            return moment(attr.reportdt).startOf('day').format('MM/DD');
+            });
+
+        let groupAggregated = _.map(groupByDay, (o,i) =>{
+            return { 
+                    dates: i,
                     cases: _.sumBy(o,'confirmed'),
                     recovers: _.sumBy(o,'recovered'),
                     deaths: _.sumBy(o,'deaths'),
-        }})
+        }});
 
-        console.log(this.agg);
+        this.agg = groupAggregated;
+
+        console.log(groupByDay);
+        console.log(groupAggregated);
         this.loaded = true
       })
       .catch( e => {
