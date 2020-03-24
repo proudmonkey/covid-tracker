@@ -4,9 +4,9 @@
     <b-card-header header-tag="nav" footer-tag="footer" >
       <b-nav card-header tabs>
         <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
-        <b-nav-item to="/" exact exact-active-class="active"><b-spinner type="grow" small></b-spinner>MN</b-nav-item>
-        <b-nav-item to="/us" exact exact-active-class="active"><b-spinner type="grow" small></b-spinner>US</b-nav-item>
-        <b-nav-item to="/global" exact exact-active-class="active"><b-spinner type="grow" small></b-spinner>Global</b-nav-item>
+        <b-nav-item to="/" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>MN</b-nav-item>
+        <b-nav-item to="/us" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>US</b-nav-item>
+        <b-nav-item to="/global" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>Global</b-nav-item>
       </b-nav>
     </b-card-header>
 
@@ -21,7 +21,7 @@
         <div class="mt-2 mb-2">
           Sources: <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html" target="_blank" class="card-link">MN Department of Health</a> 
           | <a href="https://covidtracking.com/" target="_blank">US COVID Tracking</a>
-          | <a href="https://services.arcgis.com/pEosvuftL1Kgj1UF/ArcGIS/rest/services" target="_blank">ArcGIS</a>
+          | <a href="https://www.esri.com/en-us/home" target="_blank">ArcGIS and ESRI</a>
           | <a href="https://bao.arcgis.com/InfographicsPlayer/ArcGISPro/BA_Covid19Files/minnesota.html" target="_blank">ESRI Cases and Planning Report</a>
         </div>
         <SocialShare />

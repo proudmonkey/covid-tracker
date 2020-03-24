@@ -43,11 +43,11 @@ export default {
     this.loaded = false
     axios.get('https://services.arcgis.com/pEosvuftL1Kgj1UF/ArcGIS/rest/services/Cases_public/FeatureServer/1/query?where=1%3D1&objectIds=&time=&resultType=none&outFields=*&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnDistinctValues=false&cacheHint=true&orderByFields=reportdt+asc&groupByFieldsForStatistics=reportdt&outStatistics=&having=&resultOffset=&resultRecordCount=&sqlFormat=none&f=pjson&token=')
       .then(response => {
-        let aggregateData = response.data.features.map((attr) => {
+        let data = response.data.features.map((attr) => {
                 return attr.attributes;
-         });
+        });
 
-        let groupByDay = _.groupBy(aggregateData,  (attr) => {
+        let groupByDay = _.groupBy(data,  (attr) => {
             return moment(attr.reportdt).startOf('day').format('MM/DD');
             });
 

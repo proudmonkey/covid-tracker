@@ -2,12 +2,12 @@
 <template>
 <div class="text-center">
     <h1>Minnesota COVID-19 Status</h1>
-    <h3 class="text-muted">( Data as of {{recent.checkTimeEt}} )</h3>
+    <h4 class="text-muted">( Data as of {{recent.checkTimeEt}} )</h4>
 
     <b-container class="mt-3">
         <b-row>
             <b-col>
-                <b-card bg-variant="info">
+                <b-card bg-variant="info" class="mb-2">
                     <b-card-body>
                          <template>
                             <div>
@@ -23,7 +23,7 @@
                 </b-card>
             </b-col>
             <b-col>
-                <b-card  bg-variant="success">
+                <b-card  bg-variant="success" class="mb-2">
                     <b-card-body>
                         <div>
                             <b-iconstack font-scale="5">
@@ -37,7 +37,7 @@
                 </b-card>
             </b-col>
             <b-col>
-                <b-card bg-variant="warning">
+                <b-card bg-variant="warning" class="mb-2">
                     <b-card-body>
                         <div>
                             <b-iconstack font-scale="5">
@@ -51,7 +51,7 @@
                 </b-card>
             </b-col>
             <b-col>
-                <b-card bg-variant="light">
+                <b-card bg-variant="light" class="mb-2">
                     <b-card-body>
                         <div>
                             <b-iconstack font-scale="5">
@@ -81,11 +81,20 @@
         </b-row>
     </b-container>
 
-    <b-container class="mt-5">
+    <b-container class="mt-3">
         <b-row>
             <b-col>
-                <b-card bg-variant="dark" text-variant="white" title="Details">
-                    <b-table head-variant="dark" small responsive :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :no-sort-reset="true" >
+                <b-card bg-variant="dark" text-variant="white" title="Cases by County" class="mb-2">
+                    <b-table head-variant="dark" 
+                             small 
+                             responsive
+                             sticky-header="450px"
+                             :no-border-collapse="true"
+                             :items="items" 
+                             :fields="fields" 
+                             :sort-by.sync="sortBy" 
+                             :sort-desc.sync="sortDesc" 
+                             :no-sort-reset="true" >
                         <template v-slot:cell(name)="data">
                         <b>{{data.item.attributes.name}}</b>
                         </template>
@@ -102,10 +111,9 @@
                  </b-card>
             </b-col>
             <b-col>
-                <b-card bg-variant="dark" text-variant="white" title="Trends">
+                <b-card bg-variant="dark" text-variant="white" title="Case Trends">
                     <CaseTrendChart />
                 </b-card>
-                 
             </b-col>
         </b-row>
     </b-container>

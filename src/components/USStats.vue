@@ -4,7 +4,7 @@
         <b-container class="mt-3">
             <b-row>
                 <b-col>
-                    <b-card bg-variant="info">
+                    <b-card bg-variant="info" class="mb-2">
                         <b-card-body>
                             <template>
                                 <div>
@@ -20,7 +20,7 @@
                     </b-card>
                 </b-col>
                 <b-col>
-                    <b-card bg-variant="warning">
+                    <b-card bg-variant="warning" class="mb-2">
                         <b-card-body>
                             <div>
                                 <b-iconstack font-scale="5">
@@ -28,13 +28,13 @@
                                     <b-icon stacked icon="circle"></b-icon>
                                 </b-iconstack>
                             </div>
-                            <b-card-title><h1>{{totalPositiveCount | numeral('0,0')}}</h1></b-card-title>
+                            <b-card-title><h1>{{ totalCasesFromGlobalSource | numeral('0,0')}}</h1></b-card-title>
                             <b-card-text class="mb-2">Positive</b-card-text>
                         </b-card-body>
                     </b-card>
                 </b-col>
                 <b-col>
-                    <b-card bg-variant="light">
+                    <b-card bg-vibrant="light" class="mb-2">
                         <b-card-body>
                             <div>
                                 <b-iconstack font-scale="5">
@@ -56,7 +56,7 @@
                                     <b-icon stacked icon="circle"></b-icon>
                                 </b-iconstack>
                             </div>
-                            <b-card-title><h1>{{ totalDeathCount | numeral('0,0')}}</h1></b-card-title>
+                            <b-card-title><h1>{{ totalDeathsFromGlobalSource | numeral('0,0')}}</h1></b-card-title>
                             <b-card-text class="mb-2">Deaths</b-card-text>
                         </b-card-body>
                     </b-card>
@@ -64,43 +64,69 @@
             </b-row>
         </b-container>
 
-        <div class="mt-3">
-            <b-table head-variant="dark" small hover :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :no-sort-reset="true" >
-                <template v-slot:cell(state)="data">
-                <b>{{data.item.state}}</b>
-                </template>
-                <template v-slot:cell(total)="data">
-                <b class="text-info">{{data.item.positive + data.item.negative | numeral('0,0')}}</b>
-                </template>
-                <template v-slot:cell(positive)="data">
-                <b class="text-warning">{{data.item.positive | numeral('0,0')}}</b>
-                </template>
-                <template v-slot:cell(death)="data">
-                <b class="text-danger">{{data.item.death | numeral('0,0')}}</b>
-                </template>
-            </b-table>
-        </div>
+        <b-container class="mt-3">
+                <b-row>
+                    <b-col>
+                        <b-card bg-variant="dark" text-variant="white" title="Cases by States" class="mb-2">
+                            <b-table head-variant="dark" 
+                                     small 
+                                     responsive 
+                                     sticky-header="450px"
+                                     :items="items" 
+                                     :fields="fields" 
+                                     :sort-by.sync="sortBy" 
+                                     :sort-desc.sync="sortDesc" 
+                                     :no-sort-reset="true" >
+                                <template v-slot:cell(state)="data">
+                                    <b>{{data.item.state}}</b>
+                                </template>
+                                <template v-slot:cell(total)="data">
+                                    <b-badge variant="success">{{data.item.positive + data.item.negative | numeral('0,0')}}</b-badge>
+                                </template>
+                                <template v-slot:cell(positive)="data">
+                                    <b-badge variant="warning">{{data.item.positive | numeral('0,0')}}</b-badge>
+                                </template>
+                                <template v-slot:cell(death)="data">
+                                    <b-badge variant="danger">{{data.item.death | numeral('0,0')}}</b-badge>
+                                </template>
+                            </b-table>
+                        </b-card>
+                    </b-col>
+                    <b-col>
+                        <b-card bg-variant="dark" text-variant="white" title="Case Trends">
+                            <CaseTrendChart />
+                        </b-card>
+                    </b-col>
+                </b-row>
+        </b-container>  
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CaseTrendChart from "./graph/USCaseTrend.vue";
 
 export default {
+  components: {
+    CaseTrendChart
+  },
   data () {
     return {
+      totalCasesFromGlobalSource:0,
+      totalDeathsFromGlobalSource:0,
       sortBy: 'positive',
       sortDesc: true,
       fields:[
-          'state',
-          { key: 'total', label:'Total Tested'},
-          { key: 'positive', label:'Positive', sortable: true},
-          { key: 'death', label:'Deaths'},
-          { key: 'lastUpdateEt', label:'Last Synced (ET)'}
+          { key: 'state', label:'State', variant: 'light'},
+          { key: 'total', label:'Tested', variant: 'light'},
+          { key: 'positive', label:'Positive', sortable: true, variant: 'light'},
+          { key: 'death', label:'Deaths', variant: 'light'},
+          { key: 'lastUpdateEt', label:'Last Synced (ET)', variant: 'light'}
         ],
       items: []
     }
   },
+
   computed: {
         totalTestsCount: function(){
             return this.items.reduce(function(total, item){
@@ -131,6 +157,26 @@ export default {
       .catch( e => {
         console.log(e);
       })
+
+    axios.get('https://services1.arcgis.com/0MSEUqKaxRlEPj5g/ArcGIS/rest/services/ncov_cases/FeatureServer/2/query?where=1%3D1&objectIds=18&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=*&returnGeometry=false&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=true&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pjson&token=')
+      .then(response => {
+         
+        let data = response.data.features.map((attr) => {
+                return attr.attributes;
+        });
+
+        this.totalCasesFromGlobalSource = data.map(p => p.Confirmed);
+        this.totalDeathsFromGlobalSource =  data.map(p => p.Deaths);
+      })
+      .catch( e => {
+        console.log(e);
+      })
   }
 }
 </script>
+
+<style scoped>
+.custom-box {
+  background-color: '#fd7e14';
+}
+</style>

@@ -3,20 +3,18 @@
     <facebook :url="url" title="Check the latest status update on COVID-19 here:" scale="2"></facebook>
     <twitter :url="url" title="Check the latest status update on COVID-19 here:" scale="2"></twitter>
     <linkedin :url="url" title="Check the latest status update on COVID-19 here:" scale="2"></linkedin>
-    <google :url="url" title="Check the latest status update on COVID-19 here:" scale="2"></google>
     <email :url="url" subject="Check the latest status update on COVID-19 here:" scale="2"></email>
   </div>
 </template>
 
 <script>
-import { Facebook, Twitter, Linkedin, Google, Email } from 'vue-socialmedia-share';
+import { Facebook, Twitter, Linkedin, Email } from 'vue-socialmedia-share';
 export default {
   components: {
     Facebook,
     Twitter,
     Linkedin,
-    Email,
-    Google
+    Email
   },
   data() {
     return {
