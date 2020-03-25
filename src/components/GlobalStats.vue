@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Global COVID-19 Status</h1>
+        <h1>Global Status</h1>
         <div class="mt-3" v-if="offline">
             <b-icon icon="x-circle" scale="3"></b-icon>
             <h1>Oops!</h1>
@@ -84,7 +84,16 @@
 
         <b-container class="mt-3">
             <b-card bg-variant="dark" text-variant="white" title="Cases by Country" class="mb-2">
-                <b-table head-variant="dark" responsive small :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :no-sort-reset="true">
+                <b-table head-variant="dark" 
+                         responsive 
+                         small 
+                         sticky-header="600px"
+                         :no-border-collapse="true"
+                         :items="items" 
+                         :fields="fields" 
+                         :sort-by.sync="sortBy" 
+                         :sort-desc.sync="sortDesc" 
+                         :no-sort-reset="true">
                     <template v-slot:cell(Country_Region)="data">
                         <b>{{data.item.Country_Region}}</b>
                     </template>

@@ -4,11 +4,13 @@ import { Line } from 'vue-chartjs'
 
 export default {
   extends: Line,
-  props: ['cases', 'recovers', 'deaths', 'labels'],
+  props: ['cases', 'hospitalized', 'deaths', 'labels'],
   data: () => ({
     options:{
         legend: {
-          fontColor: 'white'
+          labels:{
+            fontColor: 'white'
+          }
         },
         scales: {
            gridLines: {
@@ -18,10 +20,6 @@ export default {
             yAxes: [{
               ticks: {
                 fontColor: 'white'
-              },
-              gridLines: {
-                //display: false,
-                //lineWidth: 0
               }
             }],
             xAxes: [ {
@@ -48,20 +46,20 @@ export default {
       labels: this.labels,
       datasets: [
         {
+          label: 'Deaths',
+          backgroundColor: '#dc3545',
+          data: this.deaths
+        },
+        {
+          label: 'Hospitalized',
+          backgroundColor: '##f8f9fa',
+          data: this.hospitalized
+        },
+        {
           label: 'Cases',
           backgroundColor: '#ffc107',
           data: this.cases
         },
-        {
-          label: 'Recovery',
-          backgroundColor: '#28a745',
-          data: this.recovers
-        },
-        {
-          label: 'Deaths',
-          backgroundColor: '#dc3545',
-          data: this.deaths
-        }
       ]  
     }, this.options)
   }

@@ -3,7 +3,7 @@
     <line-chart
       v-if="loaded"
       :cases="totalCases"
-      :recovers="totalRecovery"
+      :hospitalized="totalHospitalized"
       :deaths="totalDeaths"
       :labels="dateReported"/>
   </div>
@@ -13,7 +13,6 @@
 import LineChart from './LineChart.vue'
 import axios from 'axios'
 import * as moment from "moment/moment";
-import _ from 'lodash'
 
 export default {
   name: 'LineChartContainer',
@@ -26,43 +25,25 @@ export default {
   },
   computed: {
         totalCases(){
-            return this.agg.map(p => p.cases);
+            return this.agg.map(p => p.positive || 0);
         },
-        totalRecovery(){
-            return this.agg.map(p => p.recovers);
+        totalHospitalized(){
+            return this.agg.map(p => p.hospitalized || 0);
         },
         totalDeaths(){
-            return this.agg.map(p => p.deaths);
+            return this.agg.map(p => p.death || 0);
         },
         dateReported(){
-            return this.agg.map(p => p.dates);
+            return this.agg.map(p => moment(p.dateChecked).format('MM/DD'));
         },
 
   },
  mounted () {
     this.loaded = false
-    axios.get('https://services.arcgis.com/pEosvuftL1Kgj1UF/ArcGIS/rest/services/Cases_public/FeatureServer/1/query?where=1%3D1&objectIds=&time=&resultType=none&outFields=*&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnDistinctValues=false&cacheHint=true&orderByFields=reportdt+asc&groupByFieldsForStatistics=reportdt&outStatistics=&having=&resultOffset=&resultRecordCount=&sqlFormat=none&f=pjson&token=')
+    axios.get('https://covidtracking.com/api/states/daily?state=MN')
       .then(response => {
-        let data = response.data.features.map((attr) => {
-                return attr.attributes;
-        });
-
-        let groupByDay = _.groupBy(data,  (attr) => {
-            return moment(attr.reportdt).startOf('day').format('MM/DD');
-            });
-
-        let groupAggregated = _.map(groupByDay, (o,i) =>{
-            return { 
-                    dates: i,
-                    cases: _.sumBy(o,'confirmed'),
-                    recovers: _.sumBy(o,'recovered'),
-                    deaths: _.sumBy(o,'deaths'),
-        }});
-
-        this.agg = groupAggregated;
-
-        console.log(groupByDay);
-        console.log(groupAggregated);
+        this.agg = response.data;
+        console.log(this.agg);
         this.loaded = true
       })
       .catch( e => {

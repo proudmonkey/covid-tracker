@@ -38,12 +38,12 @@ export default {
       labels: this.labels,
       datasets: [
         {
-          label: 'Cases',
-          backgroundColor: '#ffc107',
-          data: this.cases
+          label: 'Deaths',
+          backgroundColor: '#dc3545',
+          data: this.deaths
         },
         {
-          label: 'Recovery',
+          label: 'Recovered',
           backgroundColor: '#28a745',
           data: this.recovers
         },
@@ -53,9 +53,9 @@ export default {
           data: this.deaths
         },
         {
-          label: 'Deaths',
-          backgroundColor: '#dc3545',
-          data: this.deaths
+          label: 'Cases',
+          backgroundColor: '#ffc107',
+          data: this.cases
         }
       ]  
     }, this.options)

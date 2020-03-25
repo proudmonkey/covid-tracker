@@ -1,6 +1,6 @@
 <template>
     <div >
-        <h1>US COVID-19 Status</h1>
+        <h1>USA Status</h1>
         <b-container class="mt-3">
             <b-row>
                 <b-col>
@@ -65,13 +65,12 @@
         </b-container>
 
         <b-container class="mt-3">
-                <b-row>
-                    <b-col>
-                        <b-card bg-variant="dark" text-variant="white" title="Cases by States" class="mb-2">
+            <b-card bg-variant="dark" text-variant="white" title="Cases by States" class="mb-2">
                             <b-table head-variant="dark" 
                                      small 
                                      responsive 
                                      sticky-header="450px"
+                                     :no-border-collapse="true"
                                      :items="items" 
                                      :fields="fields" 
                                      :sort-by.sync="sortBy" 
@@ -90,11 +89,19 @@
                                     <b-badge variant="danger">{{data.item.death | numeral('0,0')}}</b-badge>
                                 </template>
                             </b-table>
+                        </b-card> 
+        </b-container>  
+
+        <b-container class="mt-3">
+                <b-row>
+                    <b-col>
+                        <b-card bg-variant="dark" text-variant="white" title="Trends By Date">
+                            <CaseTrendDateChart />
                         </b-card>
                     </b-col>
                     <b-col>
-                        <b-card bg-variant="dark" text-variant="white" title="Case Trends">
-                            <CaseTrendChart />
+                        <b-card bg-variant="dark" text-variant="white" title="Trends By State">
+                            <CaseTrendStateChart />
                         </b-card>
                     </b-col>
                 </b-row>
@@ -104,11 +111,13 @@
 
 <script>
 import axios from 'axios'
-import CaseTrendChart from "./graph/USCaseTrend.vue";
+import CaseTrendDateChart from "./graph/USCaseTrend.vue";
+import CaseTrendStateChart from "./graph/USStateCaseTrend.vue";
 
 export default {
   components: {
-    CaseTrendChart
+    CaseTrendStateChart,
+    CaseTrendDateChart
   },
   data () {
     return {
