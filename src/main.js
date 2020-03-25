@@ -8,6 +8,7 @@ import App from './App.vue'
 import MNStats from './components/MNStats.vue'
 import USStats from './components/USStats.vue'
 import GlobalStats from './components/GlobalStats.vue'
+import NewsUpdate from './components/News.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -23,10 +24,12 @@ Vue.use(VueLodash, { name: 'custom' , lodash: Lodash })
 const routes = [
   { path: '/', component: MNStats },
   { path: '/us', component: USStats },
-  { path: '/global', component: GlobalStats }
+  { path: '/global', component: GlobalStats },
+  { path: '/news', component: NewsUpdate }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

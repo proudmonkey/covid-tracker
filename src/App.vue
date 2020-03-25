@@ -13,6 +13,7 @@
         <b-nav-item to="/" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>MN</b-nav-item>
         <b-nav-item to="/us" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>US</b-nav-item>
         <b-nav-item to="/global" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>Global</b-nav-item>
+        <b-nav-item to="/news" exact exact-active-class="active">News</b-nav-item>
       </b-nav>
     </b-card-header>
 
@@ -32,7 +33,7 @@
           Sources: <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html" target="_blank" class="card-link">MN Department of Health</a> 
           | <a href="https://covidtracking.com/" target="_blank">US COVID Tracking</a>
           | <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">JHU CSSE</a>
-          | <a href="https://www.esri.com/en-us/home" target="_blank">ArcGIS and ESRI</a>
+          | <a href="https://coronavirus-resources.esri.com/" target="_blank">ArcGIS and ESRI</a>
           | <a href="https://bao.arcgis.com/InfographicsPlayer/ArcGISPro/BA_Covid19Files/minnesota.html" target="_blank">ESRI Cases and Planning Report</a>
         </div>
         <SocialShare />

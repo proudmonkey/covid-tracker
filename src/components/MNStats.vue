@@ -26,13 +26,14 @@
                 <b-card  bg-variant="success" class="mb-2">
                     <b-card-body>
                         <div>
-                            <b-iconstack font-scale="5">
+                            <b-iconstack font-scale="5" id="card-icon-neg">
                                 <b-icon stacked icon="dash" scale="0.5" shift-v="-0.25"></b-icon>
                                 <b-icon stacked icon="circle"></b-icon>
                             </b-iconstack>
                         </div>
                         <b-card-title><h1>{{recent.negative | numeral('0,0')}}</h1></b-card-title>
                         <b-card-text class="mb-2">Negative</b-card-text>
+                         <b-tooltip target="card-icon-neg" title="MN stopped providing negative test result numbers on 3/23/20, so negatives are as of 3/22/20"></b-tooltip>
                     </b-card-body>
                 </b-card>
             </b-col>
