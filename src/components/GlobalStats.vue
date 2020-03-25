@@ -115,6 +115,29 @@
                 </b-table>
             </b-card>
         </b-container>
+
+        <b-container class="mt-3">
+        <b-row>
+            <b-col>
+                <b-card bg-variant="dark" text-variant="white" title="Philippines" class="mb-2">
+                    <b-card-text>
+                    To my fellow filipinos who want to get the latest situation update in the Philippines and specific cities,
+                    I would recommend visiting the NCOV Tracker built by my coworker <a href="https://judedaryl.github.io/" target="_blank"> Daryl Clarino </a> below. 
+                    </b-card-text>
+                    <b-button href="https://trackncovph.jclarino.com/" target="_blank" variant="primary">COVID Tracker Philippines</b-button>
+                </b-card>
+            </b-col>
+            <b-col>
+                <b-card bg-variant="dark" text-variant="white" title="JHU CSSE" class="mb-2">
+                    <b-card-text>
+                        Mapping 2019-nCoV and interactive visual dashboard provided by the Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE).
+                    </b-card-text>
+                    <b-button href="https://systems.jhu.edu/research/public-health/ncov/" target="_blank" variant="primary">Learn more</b-button>
+                </b-card>
+            </b-col>
+        </b-row>
+    </b-container>
+                    
     </div>
 </template>
 
@@ -179,7 +202,6 @@ export default {
 
             this.items = data;
             this.countryCount = data.length;
-            console.log(data);
         }
         else
         {
