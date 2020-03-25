@@ -52,7 +52,7 @@ export default {
         },
         {
           label: 'Hospitalized',
-          backgroundColor: '##f8f9fa',
+          backgroundColor: '#6c757d',
           data: this.hospitalized
         },
         {

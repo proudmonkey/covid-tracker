@@ -51,7 +51,7 @@
                 </b-card>
             </b-col>
             <b-col>
-                <b-card bg-variant="light" class="mb-2">
+                <b-card style="background-color:#d9dadb" class="mb-2">
                     <b-card-body>
                         <div>
                             <b-iconstack font-scale="5">
