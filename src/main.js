@@ -25,7 +25,8 @@ const routes = [
   { path: '/', component: MNStats },
   { path: '/us', component: USStats },
   { path: '/global', component: GlobalStats },
-  { path: '/news', component: NewsUpdate }
+  { path: '/news', component: NewsUpdate },
+  { path: '*', redirect: '/' }
 ]
 
 const router = new VueRouter({
