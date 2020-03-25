@@ -9,7 +9,8 @@ export default {
     options:{
         legend: {
             labels:{
-                fontColor: 'white'
+                fontColor: 'white',
+                boxWidth: 10
             }
         },
         scales: {
