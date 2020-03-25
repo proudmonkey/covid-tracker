@@ -112,7 +112,7 @@
     <b-container class="mt-3">
         <b-row>
             <b-col>
-                <b-card bg-variant="dark" text-variant="white" title="Trends By Date">
+                <b-card bg-variant="dark" text-variant="white" title="Trends By Date" class="mb-2">
                     <CaseTrendDateChart />
                 </b-card>
             </b-col>
