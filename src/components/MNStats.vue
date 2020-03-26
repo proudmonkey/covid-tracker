@@ -94,17 +94,27 @@
                              :sort-by.sync="sortBy" 
                              :sort-desc.sync="sortDesc" 
                              :no-sort-reset="true" >
+                        
                         <template v-slot:cell(Combined_Key)="data">
-                        <b>{{data.item.Combined_Key | trucate}}</b>
+                        <b>{{data.item.Combined_Key | truncate}}</b>
+                        </template>
+                        <template v-slot:head(Confirmed)="data">
+                            <span class="text-warning">{{ data.label }}</span>
                         </template>
                         <template v-slot:cell(Confirmed)="data">
-                            <b-badge variant="warning">{{data.item.Confirmed | numeral('0,0')}}</b-badge>
+                            <b-badge variant="dark">{{data.item.Confirmed | numeral('0,0')}}</b-badge>
+                        </template>
+                        <template v-slot:head(Recovered)="data">
+                            <span class="text-success">{{ data.label }}</span>
                         </template>
                         <template v-slot:cell(Recovered)="data">
-                        <b-badge variant="success">{{data.item.Recovered | numeral('0,0')}}</b-badge>
+                            <b-badge variant="dark">{{data.item.Recovered | numeral('0,0')}}</b-badge>
+                        </template>
+                        <template v-slot:head(Deaths)="data">
+                            <span class="text-danger">{{ data.label }}</span>
                         </template>
                         <template v-slot:cell(Deaths)="data">
-                        <b-badge variant="danger">{{data.item.Deaths | numeral('0,0')}}</b-badge>
+                        <b-badge variant="dark">{{data.item.Deaths | numeral('0,0')}}</b-badge>
                         </template>
                     </b-table>
                  </b-card>
@@ -153,7 +163,7 @@ export default {
     }
   },
   filters: {
-    trucate: function (key) {
+    truncate: function (key) {
         return key.split(",")[0];
     }
   },

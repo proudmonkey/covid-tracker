@@ -79,14 +79,23 @@
                                 <template v-slot:cell(state)="data">
                                     <b>{{data.item.state}}</b>
                                 </template>
+                                <template v-slot:head(total)="data">
+                                    <span class="text-info">{{ data.label }}</span>
+                                </template>
                                 <template v-slot:cell(total)="data">
-                                    <b-badge variant="success">{{data.item.positive + data.item.negative | numeral('0,0')}}</b-badge>
+                                    <b-badge variant="dark">{{data.item.positive + data.item.negative | numeral('0,0')}}</b-badge>
+                                </template>
+                                <template v-slot:head(positive)="data">
+                                    <span class="text-warning">{{ data.label }}</span>
                                 </template>
                                 <template v-slot:cell(positive)="data">
-                                    <b-badge variant="warning">{{data.item.positive | numeral('0,0')}}</b-badge>
+                                    <b-badge variant="dark">{{data.item.positive | numeral('0,0')}}</b-badge>
+                                </template>
+                                <template v-slot:head(death)="data">
+                                    <span class="text-danger">{{ data.label }}</span>
                                 </template>
                                 <template v-slot:cell(death)="data">
-                                    <b-badge variant="danger">{{data.item.death | numeral('0,0')}}</b-badge>
+                                    <b-badge variant="dark">{{data.item.death | numeral('0,0')}}</b-badge>
                                 </template>
                             </b-table>
                         </b-card> 

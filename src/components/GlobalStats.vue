@@ -97,17 +97,29 @@
                     <template v-slot:cell(Country_Region)="data">
                         <b>{{data.item.Country_Region}}</b>
                     </template>
+                    <template v-slot:head(Confirmed)="data">
+                        <span class="text-warning">{{ data.label }}</span>
+                    </template>
                     <template v-slot:cell(Confirmed)="data">
-                        <b-badge variant="warning">{{data.item.Confirmed | numeral('0,0')}}</b-badge>
+                        <b-badge variant="dark">{{data.item.Confirmed | numeral('0,0')}}</b-badge>
+                    </template>
+                    <template v-slot:head(Recovered)="data">
+                        <span class="text-success">{{ data.label }}</span>
                     </template>
                     <template v-slot:cell(Recovered)="data">
-                        <b-badge variant="success">{{data.item.Recovered | numeral('0,0')}}</b-badge>
+                        <b-badge variant="dark">{{data.item.Recovered | numeral('0,0')}}</b-badge>
                     </template>
-                    <template v-slot:cell(Deaths)="data">
-                        <b-badge variant="danger">{{data.item.Deaths | numeral('0,0')}}</b-badge>
+                    <template v-slot:head(Active)="data">
+                        <span style="color:#fd7e14">{{ data.label }}</span>
                     </template>
                     <template v-slot:cell(Active)="data">
-                        <b-badge style="background-color:#fd7e14; color:black">{{data.item.Active | numeral('0,0')}}</b-badge>
+                        <b-badge variant="dark">{{data.item.Active | numeral('0,0')}}</b-badge>
+                    </template>
+                    <template v-slot:head(Deaths)="data">
+                        <span class="text-danger">{{ data.label }}</span>
+                    </template>
+                    <template v-slot:cell(Deaths)="data">
+                        <b-badge variant="dark">{{data.item.Deaths | numeral('0,0')}}</b-badge>
                     </template>
                     <template v-slot:cell(Last_Update)="data">
                         <b>{{ data.item.Last_Update | moment}}</b>
