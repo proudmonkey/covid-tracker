@@ -1,4 +1,4 @@
-# covid-mn-stats
+# COVID-19 Status Tracker
 
 With the current pandemic that we are experiencing globally, I find it inconvenient to be updated about the status of the COVID-19 cases globally and locally here in MN where currently live. Social media info are sometimes inaccurate and others are bogus websites presenting nonsense information. So today, I have decided to create a simple app that gives me the core information in a glance without having to lurk the internet that works in both mobile and web browsers. The data used in the app are based on Minnesota Department of Health, CDC, US Covid Tracking.
 
