@@ -4,8 +4,6 @@
 		<p>Stay current on COVID-19 with updates from trusted news sources.</p>
         <b-container class="mt-3">
             
-       
-
         <b-card bg-variant="dark" text-variant="white" title="WHO" class="mb-2">
             <h3>World Health Organization</h3>
 			<b-card-text>
@@ -23,6 +21,7 @@
 		</b-card>
 
         <b-card bg-variant="dark" text-variant="white" title="ECDC" class="mb-2">
+            <h4>European Centre for Disease Prevention and Control</h4>
 			<b-card-text>
                 Situation Update Worldwide
 			</b-card-text>

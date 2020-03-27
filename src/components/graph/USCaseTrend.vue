@@ -54,7 +54,6 @@ export default {
         }});
 
         this.agg = groupAggregated;
-        console.log(groupAggregated);
         this.loaded = true
       })
       .catch( e => {

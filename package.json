@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.9.12",
+    "@amcharts/amcharts4-geodata": "^4.1.13",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.7.0",

@@ -43,7 +43,6 @@ export default {
     axios.get('https://covidtracking.com/api/states/daily?state=MN')
       .then(response => {
         this.agg = response.data;
-        console.log(this.agg);
         this.loaded = true
       })
       .catch( e => {

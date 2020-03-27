@@ -134,7 +134,11 @@
             </b-col>
         </b-row>
     </b-container>
-    
+    <b-container class="mt-3">  
+        <b-card bg-variant="dark" text-variant="white" title="Cases Heat Map" class="mb-2">
+            <CaseTrendMap v-if="items.length > 0" :cases="items"/>
+        </b-card>
+    </b-container>
 </div>
 </template>
 
@@ -142,11 +146,13 @@
 import axios from 'axios'
 import CaseTrendDateChart from "./graph/MNCaseTrend.vue";
 import CaseTrendCountyChart from "./graph/MNCountyCaseTrend.vue";
+import CaseTrendMap from "./map/MNCases.vue";
 
 export default {
   components: {
     CaseTrendDateChart,
-    CaseTrendCountyChart
+    CaseTrendCountyChart,
+    CaseTrendMap
   },
   data () {
     return {

@@ -2,10 +2,13 @@
 <div id="app">
 <b-container>
   <b-card no-body
-        header="COVID-19 Pandemic Tracker"
         header-bg-variant="dark"
         header-text-variant="white"
-        align="left"/>
+        align="left">
+        <template v-slot:header>
+          <h4 class="mb-0"><b-icon icon="graph-up"></b-icon> COVID-19 Pandemic Tracker</h4>
+        </template>
+  </b-card>
   <b-card no-body>
     <b-card-header header-tag="nav" footer-tag="footer" >
       <b-nav card-header tabs >
@@ -31,10 +34,10 @@
         <div class="mt-2 mb-2">
           
           Sources: <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html" target="_blank" class="card-link">MN Department of Health</a> 
-          | <a href="https://covidtracking.com/" target="_blank">US COVID Tracking</a>
+          | <a href="https://covidtracking.com/" target="_blank">US COVID Tracking Project</a>
           | <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">JHU CSSE</a>
           | <a href="https://coronavirus-resources.esri.com/" target="_blank">ArcGIS and ESRI</a>
-          | <a href="https://bao.arcgis.com/InfographicsPlayer/ArcGISPro/BA_Covid19Files/minnesota.html" target="_blank">ESRI Cases and Planning Report</a>
+          | <a href="https://bao.arcgis.com/InfographicsPlayer/ArcGISPro/BA_Covid19Files/minnesota.html" target="_blank">ArcGIS Cases and Planning Report</a>
         </div>
         <SocialShare />
         
