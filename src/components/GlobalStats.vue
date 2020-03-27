@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Global Status</h1>
+        <h3>Global Status</h3>
         <div class="mt-3" v-if="offline">
             <b-icon icon="x-circle" scale="3"></b-icon>
             <h1>Oops!</h1>

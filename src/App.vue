@@ -6,7 +6,7 @@
         header-text-variant="white"
         align="left">
         <template v-slot:header>
-          <h4 class="mb-0"><b-icon icon="graph-up"></b-icon> COVID-19 Pandemic Tracker</h4>
+          <h5 class="mb-0"><b-icon icon="graph-up" variant="warning"></b-icon> COVID-19 Pandemic Tracker</h5>
         </template>
   </b-card>
   <b-card no-body>
@@ -32,7 +32,6 @@
           THIS WEBSITE SERVES AS AN ALTERNATIVE RESOURCE TO HELP KEEP THE PUBLIC UPDATED ON THE STATUS OF THE NCOV VIRUS. THE CONTENT OF THIS WEBSITE USES A NUMBER OF OPEN SOURCE DATASETS FROM AVAILABLE API SERVICES, INCLUDING DATA, MAPS, PLOTS AND LINKS. THE CREATOR OF THIS WEBSITE DOES NOT OWN, MAINTAIN, MODIFY THE DATASETS AND PROVIDES NO WARRANTIES, CLAIMS OR REPRESENTATIONS–WHETHER EXPRESSED, IMPLIED, OR STATUTORY–WITH RESPECT TO THIS WEBSITE, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF QUALITY, PERFORMANCE, NON–INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE, AND DISAVOWS ANY WARRANTIES CREATED BY COURSE OF DEALING, COURSE OF PERFORMANCE, OR TRADE USAGE. RELIANCE ON THE WEBSITE FOR MEDICAL GUIDANCE IS STRICTLY PROHIBITED.
         </div>
         <div class="mt-2 mb-2">
-          
           Sources: <a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html" target="_blank" class="card-link">MN Department of Health</a> 
           | <a href="https://covidtracking.com/" target="_blank">US COVID Tracking Project</a>
           | <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">JHU CSSE</a>

@@ -57,6 +57,6 @@ export default {
 <style scoped>
 .USMap {
   width: 100%;
-  height: 400px;
+  height: 465px;
 }
 </style>

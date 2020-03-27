@@ -1,6 +1,6 @@
 <template>
     <div >
-        <h1>USA Status</h1>
+        <h3>USA Status</h3>
         <b-container class="mt-3">
             <b-row>
                 <b-col>
@@ -65,7 +65,9 @@
         </b-container>
 
         <b-container class="mt-3">
-            <b-card bg-variant="dark" text-variant="white" title="Cases by States" class="mb-2">
+            <b-row>
+                    <b-col>
+                        <b-card bg-variant="dark" text-variant="white" title="Cases by States" class="mb-2">
                             <b-table head-variant="dark" 
                                      small 
                                      responsive 
@@ -99,6 +101,13 @@
                                 </template>
                             </b-table>
                         </b-card> 
+                    </b-col>
+                    <b-col>
+                        <b-card bg-variant="dark" text-variant="white" title="Cases Heat Map" class="mb-2">
+                            <CaseTrendMap v-if="items.length > 0" :cases="items"/>
+                        </b-card>
+                    </b-col>
+                </b-row>           
         </b-container>  
 
         <b-container class="mt-3">
@@ -114,11 +123,6 @@
                         </b-card>
                     </b-col>
                 </b-row>
-        </b-container>
-        <b-container class="mt-3">  
-            <b-card bg-variant="dark" text-variant="white" title="Cases Heat Map" class="mb-2">
-                <CaseTrendMap v-if="items.length > 0" :cases="items"/>
-            </b-card>
         </b-container>
     </div>
 </template>

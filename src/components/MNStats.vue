@@ -1,7 +1,7 @@
 
 <template>
 <div class="text-center">
-    <h1>Minnesota Status</h1>
+    <h3>Minnesota Status</h3>
     <h5 class="text-muted">( Data as of {{recent.checkTimeEt}} )</h5>
 
     <b-container class="mt-3">
@@ -83,8 +83,10 @@
     </b-container>
 
     <b-container class="mt-3">
-        <b-card bg-variant="dark" text-variant="white" title="Cases by County" class="mb-2">
-                    <b-table head-variant="dark" 
+        <b-row>
+            <b-col>
+                <b-card bg-variant="dark" text-variant="white" title="Cases by County" class="mb-2">
+            <b-table head-variant="dark" 
                              small 
                              responsive
                              sticky-header="450px"
@@ -116,8 +118,16 @@
                         <template v-slot:cell(Deaths)="data">
                         <b-badge variant="dark">{{data.item.Deaths | numeral('0,0')}}</b-badge>
                         </template>
-                    </b-table>
-                 </b-card>
+            </b-table>
+        </b-card>
+            </b-col>
+            <b-col>
+                <b-card bg-variant="dark" text-variant="white" title="Cases Heat Map" class="mb-2">
+                    <CaseTrendMap v-if="items.length > 0" :cases="items"/>
+                </b-card>
+            </b-col>
+        </b-row>
+        
     </b-container>
 
     <b-container class="mt-3">
@@ -133,11 +143,6 @@
                 </b-card>
             </b-col>
         </b-row>
-    </b-container>
-    <b-container class="mt-3">  
-        <b-card bg-variant="dark" text-variant="white" title="Cases Heat Map" class="mb-2">
-            <CaseTrendMap v-if="items.length > 0" :cases="items"/>
-        </b-card>
     </b-container>
 </div>
 </template>
