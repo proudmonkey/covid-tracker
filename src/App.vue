@@ -7,6 +7,7 @@
         align="left">
         <template v-slot:header>
           <h5 class="mb-0"><b-icon icon="graph-up" variant="warning"></b-icon> COVID-19 Pandemic Tracker</h5>
+          <TipsTicker />
         </template>
   </b-card>
   <b-card no-body>
@@ -49,7 +50,7 @@
           <a href="https://www.paypal.me/vmsdurano"><img src="https://proudmonkeystorage.blob.core.windows.net/cdn/common/donate_paypal.svg" height="37"></a>
         </div>
         <div class="mt-3">
-        <a href="https://vmsdurano.com/" target="_blank">Vincent Maverick Durano</a> &copy; 2020 
+        <a href="https://vmsdurano.com/" target="_blank">2020 By Vincent Maverick Durano</a> 
         </div>
     </template>
   </b-card>
@@ -59,11 +60,13 @@
 
 <script>
 import SocialShare from "./components/SocialShare";
+import TipsTicker from "./components/TipsTicker";
 
 export default {
   name: "App",
   components: {
-    SocialShare
+    SocialShare,
+    TipsTicker
   }
 };
 </script>

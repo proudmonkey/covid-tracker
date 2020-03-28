@@ -1,23 +1,39 @@
-
 <template>
-  <div class="USMap" ref="mapdiv">
+  <div class="GlobalMap" ref="mapdiv">
   </div>
 </template>
+
 <script>
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
-import am4geodata_region_usa from "@amcharts/amcharts4-geodata/usaLow";
+import am4geodata_world from "@amcharts/amcharts4-geodata/worldLow";
+import country_codes from './json/countrycodes.json'
 
 
 export default {
   props: ['cases'],
-  name: 'USMap',
+  name: 'GlobalMap',
+    data () {
+    return {
+        codes: country_codes
+    }
+  },
+  methods: {
+    getCase: (name,obj) => {
+            for(let i = 0; i < obj.length; i++){
+                let county = obj[i].Country_Region;
+                if(county == name){
+                    return(obj[i].Confirmed);
+                }
+            }      
+        }
+    },
   mounted() {
 
     // we will create the chart here
     let map = am4core.create(this.$refs.mapdiv, am4maps.MapChart);
-    map.geodata = am4geodata_region_usa;
-    map.projection = new am4maps.projections.AlbersUsa();
+    map.geodata = am4geodata_world;
+    map.projection = new am4maps.projections.Miller();
 
     let polygonSeries = new am4maps.MapPolygonSeries();
     map.series.push(polygonSeries);
@@ -32,13 +48,12 @@ export default {
     let hs = polygonTemplate.states.create("hover");
     hs.properties.fill = am4core.color("#6c757d");
 
-    const dataPlot = this.cases.map((i) =>{
-        return {
-            id: 'US-'+ i.state,
-            value: i.positive
-        }
-    });
-
+    const dataPlot = this.codes.map((i) => {
+                return {
+                    id: i.code,
+                    value: this.getCase(i.name, this.cases)
+                }
+        });
 
     polygonSeries.data= dataPlot;
     polygonTemplate.propertyFields.fill = "fill";
@@ -55,15 +70,15 @@ export default {
     },
     beforeDestroy() {
         if (this.chart) {
-        this.chart.dispose();
+            this.chart.dispose();
         }
     }
 }
 </script>
 
 <style scoped>
-.USMap {
+.GlobalMap {
   width: 100%;
-  height: 465px;
+  height: 450px;
 }
 </style>

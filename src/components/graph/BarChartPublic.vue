@@ -1,9 +1,8 @@
-
 <script>
-import { Line } from 'vue-chartjs'
+import { Bar } from 'vue-chartjs'
 
 export default {
-  extends: Line,
+  extends: Bar,
   props: ['cases', 'recovers', 'deaths', 'active', 'labels'],
   data: () => ({
     options:{
@@ -39,14 +38,9 @@ export default {
       labels: this.labels,
       datasets: [
         {
-          label: 'Deaths',
-          backgroundColor: '#dc3545',
-          data: this.deaths
-        },
-        {
-          label: 'Recovered',
-          backgroundColor: '#28a745',
-          data: this.recovers
+          label: 'Cases',
+          backgroundColor: '#ffc107',
+          data: this.cases
         },
         {
           label: 'Active',
@@ -54,9 +48,14 @@ export default {
           data: this.active
         },
         {
-          label: 'Cases',
-          backgroundColor: '#ffc107',
-          data: this.cases
+          label: 'Recovered',
+          backgroundColor: '#28a745',
+          data: this.recovers
+        },
+        {
+          label: 'Deaths',
+          backgroundColor: '#dc3545',
+          data: this.deaths
         }
       ]  
     }, this.options)
