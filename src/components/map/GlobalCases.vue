@@ -79,6 +79,6 @@ export default {
 <style scoped>
 .GlobalMap {
   width: 100%;
-  height: 450px;
+  height: 592px;
 }
 </style>

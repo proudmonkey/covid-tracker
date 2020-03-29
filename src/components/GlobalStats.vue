@@ -6,76 +6,76 @@
             <h1>Oops!</h1>
             <p>The downstream service is down at the moment.</p>
         </div>
-
+        
         <b-container class="mt-3">
             <b-row>
                 <b-col>
                     <b-card bg-variant="warning" class="mb-2">
                         <b-card-body>
-                            <div>
+                            <div class="mb-2">
                                 <b-iconstack font-scale="5">
-                                    <b-icon stacked icon="plus" scale="0.5" shift-v="-0.25"></b-icon>
+                                    <b-icon stacked icon="person-plus" scale="0.5" shift-v="-0.25"></b-icon>
                                     <b-icon stacked icon="circle"></b-icon>
                                 </b-iconstack>
                             </div>
-                            <b-card-title><h4>{{totalCorfirmed | numeral('0,0')}}</h4></b-card-title>
-                            <b-card-text class="mb-2">Positve</b-card-text>
+                            <b-card-title><span class="total-count">{{totalCorfirmed | numeral('0,0')}}</span></b-card-title>
+                            <b-card-text class="mb-2"><h5>POSITIVE</h5></b-card-text>
                         </b-card-body>
                     </b-card>
                 </b-col>
                 <b-col>
                     <b-card bg-variant="success" class="mb-2">
                         <b-card-body>
-                            <div>
+                            <div class="mb-2">
                                 <b-iconstack font-scale="5">
-                                    <b-icon stacked icon="check" scale="0.5" shift-v="-0.25"></b-icon>
+                                    <b-icon stacked icon="person-check" scale="0.5" shift-v="-0.25"></b-icon>
                                     <b-icon stacked icon="circle"></b-icon>
                                 </b-iconstack>
                             </div>
-                            <b-card-title><h4>{{totalRecovered | numeral('0,0')}}</h4></b-card-title>
-                            <b-card-text class="mb-2">Recovered</b-card-text>
+                            <b-card-title><span class="total-count">{{totalRecovered | numeral('0,0')}}</span></b-card-title>
+                            <b-card-text class="mb-2"><h5>RECOVERED</h5></b-card-text>
                         </b-card-body>
                     </b-card>
                 </b-col>
                 <b-col>
                     <b-card style="background-color:#fd7e14" class="mb-2">
                         <b-card-body>
-                            <div>
+                            <div class="mb-2">
                                 <b-iconstack font-scale="5">
-                                    <b-icon stacked icon="shield-lock" scale="0.5" shift-v="-0.25"></b-icon>
+                                    <b-icon stacked icon="person-plus-fill" scale="0.5" shift-v="-0.25"></b-icon>
                                     <b-icon stacked icon="circle"></b-icon>
                                 </b-iconstack>
                             </div>
-                            <b-card-title><h4>{{totalActive | numeral('0,0')}}</h4></b-card-title>
-                            <b-card-text class="mb-2">Active</b-card-text>
+                            <b-card-title><span class="total-count">{{totalActive | numeral('0,0')}}</span></b-card-title>
+                            <b-card-text class="mb-2"><h5>ACTIVE</h5></b-card-text>
                         </b-card-body>
                     </b-card>
                 </b-col>
                 <b-col>
                     <b-card  bg-variant="danger" class="mb-2">
                         <b-card-body>
-                            <div>
+                            <div class="mb-2">
                                 <b-iconstack font-scale="5">
                                     <b-icon stacked icon="x-circle" scale="0.5" shift-v="-0.25" animation="spin"></b-icon>
                                     <b-icon stacked icon="circle"></b-icon>
                                 </b-iconstack>
                             </div>
-                            <b-card-title><h4>{{ totalDeaths | numeral('0,0')}}</h4></b-card-title>
-                            <b-card-text class="mb-2">Deaths</b-card-text>
+                            <b-card-title><span class="total-count">{{ totalDeaths | numeral('0,0')}}</span></b-card-title>
+                            <b-card-text class="mb-2"><h5>DEATHS</h5></b-card-text>
                         </b-card-body>
                     </b-card>
                 </b-col>
                 <b-col>
                     <b-card bg-variant="light">
                         <b-card-body>
-                            <div>
+                            <div class="mb-2">
                                 <b-iconstack font-scale="5">
                                     <b-icon stacked icon="flag" scale="0.5"></b-icon>
                                     <b-icon stacked icon="circle"></b-icon>
                                 </b-iconstack>
                             </div>
-                            <b-card-title><h4>{{ countryCount | numeral('0,0')}}</h4></b-card-title>
-                            <b-card-text class="mb-2">Countries</b-card-text>
+                            <b-card-title><span class="total-count">{{ countryCount | numeral('0,0')}}</span></b-card-title>
+                            <b-card-text class="mb-2"><h5>COUNTRIES</h5></b-card-text>
                         </b-card-body>
                     </b-card>
                 </b-col>
@@ -128,7 +128,7 @@
             </b-card>
         </b-container>
 
-        <b-container class="mt-3">
+        <b-container class="mt-2">
             <b-row>
                 <b-col>
                     <b-card bg-variant="dark" text-variant="white" title="Top 10" class="mb-2">
@@ -143,7 +143,7 @@
             </b-row>
         </b-container>
 
-        <b-container class="mt-3">
+        <b-container class="mt-2">
             <b-row>
                 <b-col>
                     <b-card bg-variant="dark" text-variant="white" title="Philippines" class="mb-2">
@@ -158,6 +158,8 @@
                     <b-card bg-variant="dark" text-variant="white" title="JHU CSSE" class="mb-2">
                         <b-card-text>
                             Mapping 2019-nCoV and interactive visual dashboard provided by the Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE).
+                            You can also visit their interactive dashboard <a href="https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6" target="_blank">here.</a>
+                            <br/>
                         </b-card-text>
                         <b-button href="https://systems.jhu.edu/research/public-health/ncov/" target="_blank" variant="primary">Learn more</b-button>
                     </b-card>
@@ -251,3 +253,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container{
+   max-width: 100%; 
+}
+.total-count{
+    font-size:1.2em;
+    font-weight: 700;
+}
+</style>

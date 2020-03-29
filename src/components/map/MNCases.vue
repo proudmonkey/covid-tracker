@@ -88,6 +88,6 @@ export default {
 <style scoped>
 .MNMap {
   width: 100%;
-  height: 465px;
+  height: 417px;
 }
 </style>

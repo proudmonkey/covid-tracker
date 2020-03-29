@@ -1,68 +1,129 @@
 <template>
-    <div >
+    <div>
         <h3>USA Status</h3>
         <b-container class="mt-3">
-            <b-row>
-                <b-col>
-                    <b-card bg-variant="info" class="mb-2">
-                        <b-card-body>
-                            <template>
-                                <div>
-                                    <b-iconstack font-scale="5">
-                                        <b-icon stacked icon="check-box" scale="0.5" shift-v="-0.25"></b-icon>
-                                        <b-icon stacked icon="circle"></b-icon>
-                                    </b-iconstack>
-                                </div>
-                                </template>
-                            <b-card-title><h1>{{totalTestsCount | numeral('0,0')}}</h1></b-card-title>
-                            <b-card-text class="mb-2">Tested</b-card-text>
-                        </b-card-body>
-                    </b-card>
-                </b-col>
-                <b-col>
-                    <b-card bg-variant="warning" class="mb-2">
-                        <b-card-body>
-                            <div>
-                                <b-iconstack font-scale="5">
-                                    <b-icon stacked icon="plus" scale="0.5" shift-v="-0.25"></b-icon>
-                                    <b-icon stacked icon="circle"></b-icon>
-                                </b-iconstack>
-                            </div>
-                            <b-card-title><h1>{{ totalCasesFromGlobalSource | numeral('0,0')}}</h1></b-card-title>
-                            <b-card-text class="mb-2">Positive</b-card-text>
-                        </b-card-body>
-                    </b-card>
-                </b-col>
-                <b-col>
-                    <b-card style="background-color:#d9dadb" class="mb-2">
-                        <b-card-body>
-                            <div>
-                                <b-iconstack font-scale="5">
-                                    <b-icon stacked icon="shield-lock" scale="0.5" shift-v="-0.25"></b-icon>
-                                    <b-icon stacked icon="circle"></b-icon>
-                                </b-iconstack>
-                            </div>
-                            <b-card-title><h1>{{totalHospitalizedCount | numeral('0,0')}}</h1></b-card-title>
-                            <b-card-text class="mb-2">Hospitalized</b-card-text>
-                        </b-card-body>
-                    </b-card>
-                </b-col>
-                <b-col>
-                    <b-card  bg-variant="danger">
-                        <b-card-body>
-                            <div>
-                                <b-iconstack font-scale="5">
-                                    <b-icon stacked icon="x-circle" scale="0.5" shift-v="-0.25" animation="spin"></b-icon>
-                                    <b-icon stacked icon="circle"></b-icon>
-                                </b-iconstack>
-                            </div>
-                            <b-card-title><h1>{{ totalDeathsFromGlobalSource | numeral('0,0')}}</h1></b-card-title>
-                            <b-card-text class="mb-2">Deaths</b-card-text>
-                        </b-card-body>
-                    </b-card>
-                </b-col>
-            </b-row>
-        </b-container>
+        <b-row>
+            <b-col>
+                <b-card bg-variant="info" class="mb-2">
+                    <b-card-body>
+                        <div class="mb-2">
+                            <b-iconstack font-scale="5">
+                                <b-icon stacked icon="check-box" scale="0.5" shift-v="-0.25"></b-icon>
+                                <b-icon stacked icon="circle"></b-icon>
+                            </b-iconstack>
+                        </div>
+                        <b-card-title>
+                            <b-container>
+                                <b-row no-gutters>
+                                    <b-col class="d-flex flex-row justify-content-center">
+                                        <div class="media">
+                                            <span class="total-count">{{totalTestsCount | numeral('0,0')}}</span>
+                                            <span id="new-update-test" class="new-update-group"> 
+                                                <b-icon icon="caret-up-fill" scale="1.1" ></b-icon>
+                                                <div>{{totalTestedIncreaseToday | numeral('0')}}</div>
+                                                <b-tooltip target="new-update-test" title="New"></b-tooltip>
+                                            </span>
+                                        </div>
+                                        </b-col>
+                                    </b-row>
+                                </b-container>
+                            </b-card-title>
+                        <b-card-text class="mb-2"><h5>TESTED</h5></b-card-text>  
+                    </b-card-body>  
+                </b-card>
+            </b-col>
+            <b-col>
+                <b-card bg-variant="warning" class="mb-2">
+                    <b-card-body>
+                        <div class="mb-2">
+                            <b-iconstack font-scale="5">
+                                <b-icon stacked icon="person-plus" scale="0.5" shift-v="-0.25"></b-icon>
+                                <b-icon stacked icon="circle"></b-icon>
+                            </b-iconstack>
+                        </div>
+                        <b-card-title>
+                            <b-container>
+                                <b-row no-gutters>
+                                    <b-col class="d-flex flex-row justify-content-center">
+                                        <div class="media">
+                                            <span class="total-count">{{totalCasesFromGlobalSource | numeral('0,0')}}</span>
+                                            <span id="new-update-cases" class="new-update-group"> 
+                                                <b-icon icon="caret-up-fill" scale="1.1" ></b-icon>
+                                                <div>{{totalPositiveIncreaseToday | numeral('0')}}</div>
+                                                <b-tooltip target="new-update-cases" title="New"></b-tooltip>
+                                            </span>
+                                        </div>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
+                        </b-card-title>
+                        <b-card-text class="mb-2"><h5>POSITIVE</h5></b-card-text>
+                    </b-card-body>
+                </b-card>
+            </b-col>
+            <b-col>
+                <b-card style="background-color:#d9dadb" class="mb-2">
+                    <b-card-body>
+                        <div class="mb-2">
+                            <b-iconstack font-scale="5">
+                                <b-icon stacked icon="person-bounding-box" scale="0.5" shift-v="-0.25"></b-icon>
+                                <b-icon stacked icon="circle"></b-icon>
+                            </b-iconstack>
+                        </div>
+                        <b-card-title>
+                            <b-container>
+                                <b-row no-gutters>
+                                    <b-col class="d-flex flex-row justify-content-center">
+                                        <div class="media">
+                                            <span class="total-count">{{totalHospitalizedCount | numeral('0,0')}}</span>
+                                            <span id="new-update-hos" class="new-update-group"> 
+                                                <b-icon icon="caret-up-fill" scale="1.1" ></b-icon>
+                                                <div>{{totalHospitalizedIncreaseToday | numeral('0')}}</div>
+                                                <b-tooltip target="new-update-hos" title="New"></b-tooltip>
+                                            </span>
+                                        </div>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
+                        </b-card-title>
+                        <b-card-text class="mb-2"><h5>HOSPITALIZED</h5></b-card-text>
+                    </b-card-body>
+                </b-card>
+            </b-col>
+
+            <b-col>
+                <b-card bg-variant="danger" class="mb-2">
+                    <b-card-body>
+                        <div class="mb-2">
+                            <b-iconstack font-scale="5">
+                                <b-icon stacked icon="x-circle" scale="0.5" shift-v="-0.25" animation="spin"></b-icon>
+                                <b-icon stacked icon="circle"></b-icon>
+                            </b-iconstack>
+                        </div>
+                        <b-card-title>
+                            <b-container>
+                                <b-row no-gutters>
+                                    <b-col class="d-flex flex-row justify-content-center">
+                                        <div class="media">
+                                            <span class="total-count">{{totalDeathsFromGlobalSource | numeral('0,0')}}</span>
+                                            <span id="new-update-deaths" class="new-update-group"> 
+                                                <b-icon icon="caret-up-fill" scale="1.1" ></b-icon>
+                                                <div>{{totalDeathIncreaseToday | numeral('0')}}</div>
+                                                <b-tooltip target="new-update-deaths" title="New"></b-tooltip>
+                                            </span>
+                                        </div>
+                                    </b-col>
+                                </b-row>
+                            </b-container>
+                        </b-card-title>
+                        <b-card-text class="mb-2"><h5>DEATHS</h5></b-card-text>
+                    </b-card-body>
+                </b-card>
+            </b-col>
+        </b-row>
+    </b-container>
+
+        
 
         <b-container class="mt-3">
             <b-row>
@@ -110,8 +171,13 @@
                 </b-row>           
         </b-container>  
 
-        <b-container class="mt-3">
+        <b-container class="mt-2">
                 <b-row>
+                    <b-col>
+                        <b-card bg-variant="dark" text-variant="white" title="Trends By Day" class="mb-2">
+                            <CaseTrendDailyChart v-if="daily.length > 0" :cases="daily" />
+                        </b-card>
+                    </b-col>
                     <b-col>
                         <b-card bg-variant="dark" text-variant="white" title="Trends By Date" class="mb-2">
                             <CaseTrendDateChart />
@@ -129,13 +195,16 @@
 
 <script>
 import axios from 'axios'
+import _ from 'lodash'
 import CaseTrendDateChart from "./graph/USCaseTrend.vue";
+import CaseTrendDailyChart from "./graph/USCaseTrendDaily.vue";
 import CaseTrendStateChart from "./graph/USStateCaseTrend.vue";
 import CaseTrendMap from "./map/USCases.vue";
 
 export default {
   components: {
     CaseTrendStateChart,
+    CaseTrendDailyChart,
     CaseTrendDateChart,
     CaseTrendMap
   },
@@ -143,6 +212,8 @@ export default {
     return {
       totalCasesFromGlobalSource:0,
       totalDeathsFromGlobalSource:0,
+      daily:[],
+      today:[],
       sortBy: 'positive',
       sortDesc: true,
       fields:[
@@ -176,12 +247,37 @@ export default {
             return this.items.reduce(function(total, item){
             return total + item.death; 
             },0);
+        },
+        totalTestedIncreaseToday(){
+        return this.today.map(p => p.totalTestResultsIncrease);
+        },
+        totalPositiveIncreaseToday(){
+            return this.today.map(p => p.positiveIncrease);
+        },
+        totalHospitalizedIncreaseToday(){
+            return this.today.map(p => p.hospitalizedIncrease);
+        },
+        totalDeathIncreaseToday(){
+            return this.today.map(p => p.deathIncrease);
         }
   },
   mounted () {
     axios.get('https://covidtracking.com/api/states')
       .then(response => {
         this.items = response.data
+      })
+      .catch( e => {
+        console.log(e);
+      })
+
+     axios.get('https://covidtracking.com/api/us/daily')
+      .then(response => {
+        let data = response.data
+      
+        let dataSorted = _.orderBy(data, (p) => new Date(p.dateChecked), 'desc');
+        this.daily = dataSorted;
+        
+        this.today = _.take(dataSorted,1);
       })
       .catch( e => {
         console.log(e);
@@ -205,7 +301,19 @@ export default {
 </script>
 
 <style scoped>
+.container{
+   max-width: 100%; 
+}
 .custom-box {
   background-color: '#fd7e14';
+}
+.total-count{
+    font-size:1.2em;
+    font-weight: 700;
+}
+.new-update-group {
+  margin-left: 5px; 
+  font-size:.6em;
+  font-weight: 500;
 }
 </style>

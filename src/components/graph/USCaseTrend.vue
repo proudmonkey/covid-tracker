@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
+  <div class="USMap">
     <line-chart
       v-if="loaded"
+      :width="300" 
+      :height="300"
       :cases="totalCases"
       :hospitalized="totalHospitalized"
       :deaths="totalDeaths"

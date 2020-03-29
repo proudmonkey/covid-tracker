@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
+  <div class="GlobalTrend">
     <bar-chart
       v-if="loaded"
+      :width="500" 
+      :height="500"
       :cases="totalCases"
       :recovers="totalRecovery"
       :deaths="totalDeaths"

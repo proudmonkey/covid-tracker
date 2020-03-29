@@ -1,8 +1,8 @@
 <template>
     <div id="tipsTicker" class="ticker box mt-2">
         <article class="media">
-            <span class="tips-title media-left"> 
-                <b-icon icon="info" scale="1.5" variant="info"></b-icon> STOP the Spread:
+            <span> 
+                <b-icon icon="bookmark-check" scale="1.5" variant="info"></b-icon> <span class="media-content">STOP the Spread:</span>
             </span>
             <div class="media-content">
                 <transition name="fade" tag="div" mode="out-in">
@@ -54,6 +54,8 @@ export default {
 
 .tips {
   color: #17a2b8;
+  font-size:.9em;
+  font-weight: 400;
 }
 
 .fade-enter-active, .fade-leave-active {

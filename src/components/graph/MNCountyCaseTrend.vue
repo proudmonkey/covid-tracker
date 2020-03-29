@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
+  <div class="MNChart">
     <line-chart
       v-if="loaded"
+      :width="300" 
+      :height="300"
       :cases="totalCases"
       :recovers="totalRecovery"
       :deaths="totalDeaths"
@@ -12,10 +14,11 @@
 
 <script>
 import LineChart from './LineChartPublic.vue'
-import axios from 'axios'
+//import axios from 'axios'
 
 export default {
   name: 'LineChartContainer',
+  props: ['cases'],
   components: { LineChart },
   data() {
       return {
@@ -42,18 +45,10 @@ export default {
 },
  mounted () {
     this.loaded = false
-    axios.get('https://services1.arcgis.com/0MSEUqKaxRlEPj5g/ArcGIS/rest/services/ncov_cases_US/FeatureServer/0/query?where=Province_State%3D%27Minnesota%27+and+Confirmed+%3E+0&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=Country_Region%2CCombined_Key%2CConfirmed%2CDeaths%2CRecovered%2CActive%2CLast_Update&returnGeometry=false&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=true&cacheHint=true&orderByFields=&groupByFieldsForStatistics=Last_Update&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pjson&token=')
-      .then(response => {
-        let data = response.data.features.map((attr) => {
-                return attr.attributes;
-        });
-        
-        this.agg = data;
+    if(this.cases.length > 0){
+        this.agg = this.cases;
         this.loaded = true
-      })
-      .catch( e => {
-        console.log(e);
-      })
+    }
   }
 }
 </script>

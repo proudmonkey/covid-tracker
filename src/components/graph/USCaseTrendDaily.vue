@@ -1,9 +1,9 @@
 <template>
-  <div class="MNMap">
+  <div class="USMap">
     <line-chart
+      v-if="loaded"
       :width="300" 
       :height="300"
-      v-if="loaded"
       :cases="totalCases"
       :hospitalized="totalHospitalized"
       :deaths="totalDeaths"
@@ -13,11 +13,11 @@
 
 <script>
 import LineChart from './LineChart.vue'
-import axios from 'axios'
 import * as moment from "moment/moment";
 
 export default {
   name: 'LineChartContainer',
+  props: ['cases'],
   components: { LineChart },
   data() {
       return {
@@ -27,13 +27,13 @@ export default {
   },
   computed: {
         totalCases(){
-            return this.agg.map(p => p.positive || 0);
+            return this.agg.map(p => p.positiveIncrease || 0);
         },
         totalHospitalized(){
-            return this.agg.map(p => p.hospitalized || 0);
+            return this.agg.map(p => p.hospitalizedIncrease || 0);
         },
         totalDeaths(){
-            return this.agg.map(p => p.death || 0);
+            return this.agg.map(p => p.deathIncrease || 0);
         },
         dateReported(){
             return this.agg.map(p => moment(p.dateChecked).format('MM/DD'));
@@ -42,14 +42,10 @@ export default {
   },
  mounted () {
     this.loaded = false
-    axios.get('https://covidtracking.com/api/states/daily?state=MN')
-      .then(response => {
-        this.agg = response.data;
+    if(this.cases.length > 0){
+        this.agg = this.cases;
         this.loaded = true
-      })
-      .catch( e => {
-        console.log(e);
-      })
+    }
   }
 }
 </script>
