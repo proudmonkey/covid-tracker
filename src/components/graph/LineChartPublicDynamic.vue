@@ -1,10 +1,11 @@
 
 <script>
-import { Line} from 'vue-chartjs'
+import { Line, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
 
 export default {
   extends: Line,
-  props: ['cases', 'recovers', 'deaths', 'active', 'labels'],
+  mixins: [reactiveProp],
   data: () => ({
     options:{
         legend: {
@@ -35,31 +36,7 @@ export default {
     }
   }),
   mounted () {
-    this.renderChart({
-      labels: this.labels,
-      datasets: [
-        {
-          label: 'Deaths',
-          backgroundColor: '#dc3545',
-          data: this.deaths
-        },
-        {
-          label: 'Recovered',
-          backgroundColor: '#28a745',
-          data: this.recovers
-        },
-        {
-          label: 'Active',
-          backgroundColor: '#fd7e14',
-          data: this.active
-        },
-        {
-          label: 'Cases',
-          backgroundColor: '#ffc107',
-          data: this.cases
-        }
-      ]  
-    }, this.options)
+    this.renderChart(this.chartData, this.options)
   }
 }
 </script>

@@ -1,9 +1,17 @@
 
 <template>
 <div class="text-center">
-    <h3>Minnesota Status</h3>
-    <h5 class="text-muted">( Data as of {{recent.checkTimeEt}} )</h5>
-
+    <span>
+    <select @change="onChange()" v-model="stateSelected">
+        <option disabled value="">SELECT STATE</option>
+        <option v-for="state in stateCodes" :value="{code:state.abbreviation, name:state.name}" :key="state.abbreviation">
+            {{ state.name }}
+        </option>
+    </select>
+    
+    </span>
+    <h3>{{ stateSelected.name }}</h3>
+    <span class="text-muted" v-if="daily.length > 0">( Data as of {{recent.checkTimeEt}} )</span>
     <b-container class="mt-3">
         <b-row>
             <b-col>
@@ -195,11 +203,6 @@
                     </b-table>
                 </b-card>
             </b-col>
-            <b-col>
-                <b-card bg-variant="dark" text-variant="white" title="Cases Heat Map">
-                    <CaseTrendMap v-if="items.length > 0" :cases="items"/>
-                </b-card>
-            </b-col>
         </b-row>
         
     </b-container>
@@ -208,17 +211,17 @@
         <b-row>
             <b-col>
                 <b-card bg-variant="dark" text-variant="white" title="Trends By Day" class="mb-2">
-                    <CaseTrendDailyChart v-if="daily.length > 0" :cases="daily" />
+                    <CaseTrendDailyChart v-if="daily.length > 0" :cases="daily" :key="daily" />
                 </b-card>
             </b-col>
             <b-col>
                 <b-card bg-variant="dark" text-variant="white" title="Trends By Date" class="mb-2">
-                    <CaseTrendDateChart v-if="daily.length > 0" :cases="daily" />
+                    <CaseTrendDateChart v-if="daily.length > 0" :cases="daily" :key="daily"  />
                 </b-card>
             </b-col>
             <b-col>
                 <b-card bg-variant="dark" text-variant="white" title="Trends By County">
-                    <CaseTrendCountyChart v-if="items.length > 0" :cases="items" />
+                    <CaseTrendStateChart v-if="items.length > 0" :cases="items" :key="items" />
                 </b-card>
             </b-col>
         </b-row>
@@ -229,20 +232,21 @@
 <script>
 import axios from 'axios'
 import _ from 'lodash'
-import CaseTrendDateChart from "./graph/MNCaseTrend.vue";
-import CaseTrendDailyChart from "./graph/MNCaseTrendDaily.vue";
-import CaseTrendCountyChart from "./graph/MNCountyCaseTrend.vue";
-import CaseTrendMap from "./map/MNCases.vue";
+import CaseTrendDateChart from "./graph/StateCaseTrend.vue";
+import CaseTrendDailyChart from "./graph/StateCaseTrendDaily.vue";
+import CaseTrendStateChart from "./graph/StateCountyCaseTrend.vue";
+import state_codes from './map/json/states.json'
 
 export default {
   components: {
     CaseTrendDateChart,
     CaseTrendDailyChart,
-    CaseTrendCountyChart,
-    CaseTrendMap
+    CaseTrendStateChart
   },
   data () {
     return {
+      stateSelected: '',
+      stateCodes: state_codes,
       recent: [],
       daily:[],
       today:[],
@@ -257,6 +261,54 @@ export default {
       items: []
     }
   },
+  methods: {
+        onChange() {
+            let code =this.stateSelected.code;
+            console.log(this.stateSelected.code);
+            this.getRecentData(code);
+            this.getDailyUpdate(code);
+            this.getArcGISData(this.stateSelected.name);
+        },
+        getRecentData(stateCode){
+            axios.get('https://covidtracking.com/api/states?state=' + stateCode)
+            .then(response => {
+                this.recent = response.data;
+            })
+            .catch( e => {
+                console.log(e);
+            })
+        },
+        getDailyUpdate(stateCode){
+            axios.get('https://covidtracking.com/api/states/daily?state=' + stateCode)
+            .then(response => {
+                let data = response.data
+            
+                let dataSorted = _.orderBy(data, (p) => new Date(p.dateChecked), 'desc');
+                this.daily = dataSorted;
+                this.today = _.take(dataSorted,1);
+            })
+            .catch( e => {
+                console.log(e);
+            })
+        },
+        getArcGISData(stateName){
+            let arcgisEndpoint ='https://services1.arcgis.com/0MSEUqKaxRlEPj5g/ArcGIS/rest/services/ncov_cases_US/FeatureServer/0/query?where=Province_State%3D%27' + stateName +'%27&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=Country_Region%2CCombined_Key%2CConfirmed%2CDeaths%2CRecovered%2CActive%2CLast_Update&returnGeometry=false&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=true&cacheHint=true&orderByFields=&groupByFieldsForStatistics=Last_Update&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pjson&token=';
+            axios.get(arcgisEndpoint)
+            .then(response => {
+                let data = response.data.features.map((attr) => {
+                    return attr.attributes;
+                });
+
+                let withCases = _.filter(data, (d) => {
+                        return d.Confirmed > 0
+                });
+                this.items = withCases;
+            })
+            .catch( e => {
+                console.log(e);
+            })
+        }       
+   },
   filters: {
     truncate: function (key) {
         return key.split(",")[0];
@@ -280,42 +332,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('https://covidtracking.com/api/states?state=MN')
-      .then(response => {
-        this.recent = response.data;
-      })
-      .catch( e => {
-        console.log(e);
-      })
 
-    axios.get('https://covidtracking.com/api/states/daily?state=MN')
-      .then(response => {
-        let data = response.data
-      
-        let dataSorted = _.orderBy(data, (p) => new Date(p.dateChecked), 'desc');
-        this.daily = dataSorted;
-        
-        this.today = _.take(dataSorted,1);
-      })
-      .catch( e => {
-        console.log(e);
-      })
-
-    let arcgisEndpoint ='https://services1.arcgis.com/0MSEUqKaxRlEPj5g/ArcGIS/rest/services/ncov_cases_US/FeatureServer/0/query?where=Province_State%3D%27Minnesota%27&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=Country_Region%2CCombined_Key%2CConfirmed%2CDeaths%2CRecovered%2CActive%2CLast_Update&returnGeometry=false&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=true&cacheHint=true&orderByFields=&groupByFieldsForStatistics=Last_Update&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pjson&token=';
-    axios.get(arcgisEndpoint)
-      .then(response => {
-        let data = response.data.features.map((attr) => {
-            return attr.attributes;
-        });
-
-        let withCases = _.filter(data, (d) => {
-                return d.Confirmed > 0
-        });
-        this.items = withCases;
-      })
-      .catch( e => {
-        console.log(e);
-      })
   }
 }
 </script>
@@ -325,12 +342,12 @@ export default {
    max-width: 100%; 
 }
 .total-count{
-    font-size:1.2em;
+    font-size:1.0em;
     font-weight: 700;
 }
 .new-update-group {
   margin-left: 5px; 
-  font-size:.6em;
+  font-size:.5em;
   font-weight: 500;
 }
 </style>

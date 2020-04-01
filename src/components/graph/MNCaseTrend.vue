@@ -13,11 +13,12 @@
 
 <script>
 import LineChart from './LineChart.vue'
-import axios from 'axios'
+//import axios from 'axios'
 import * as moment from "moment/moment";
 
 export default {
   name: 'LineChartContainer',
+  props: ['cases'],
   components: { LineChart },
   data() {
       return {
@@ -42,14 +43,18 @@ export default {
   },
  mounted () {
     this.loaded = false
-    axios.get('https://covidtracking.com/api/states/daily?state=MN')
-      .then(response => {
-        this.agg = response.data;
+    // axios.get('https://covidtracking.com/api/states/daily?state=MN')
+    //   .then(response => {
+    //     this.agg = response.data;
+    //     this.loaded = true
+    //   })
+    //   .catch( e => {
+    //     console.log(e);
+    //   })
+     if(this.cases.length > 0){
+        this.agg = this.cases;
         this.loaded = true
-      })
-      .catch( e => {
-        console.log(e);
-      })
+    }
   }
 }
 </script>

@@ -15,9 +15,11 @@
       <b-nav card-header tabs >
         <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
         <b-nav-item to="/" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>MN</b-nav-item>
+        <b-nav-item to="/state" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>STATE</b-nav-item>
         <b-nav-item to="/us" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>US</b-nav-item>
-        <b-nav-item to="/global" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>Global</b-nav-item>
-        <b-nav-item to="/news" exact exact-active-class="active">News</b-nav-item>
+        <b-nav-item to="/global" exact exact-active-class="active"><b-spinner type="grow" variant="danger" small></b-spinner>GLOBAL</b-nav-item>
+        <b-nav-item to="/news" exact exact-active-class="active">NEWS</b-nav-item>
+        
       </b-nav>
     </b-card-header>
 
